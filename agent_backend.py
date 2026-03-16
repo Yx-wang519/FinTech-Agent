@@ -872,7 +872,7 @@ def run_multi_agent(question: str, verbose: bool = True, routing_text: str | Non
         final_answer = r.answer
 
     # 4) market-only
-    elif any(x in q for x in ["price performance", "grew", "return", "top gainers", "top losers", "market open", "market closed", "which stock", "which stocks", "sector"]):
+    elif any(x in q for x in ["price performance",'performance', "grew", "return", "top gainers", "top losers", "market open", "market closed", "which stock", "which stocks", "sector"]):
         r = run_market_agent(question, verbose=verbose)
         agent_results.append(r)
         final_answer = r.answer
