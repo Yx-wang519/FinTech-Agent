@@ -170,15 +170,42 @@ print("✅ 5 provided tools ready")
 # ── Tool 6 — YOUR IMPLEMENTATION ─────────────────────────────
 def get_company_overview(ticker: str) -> dict:
     ticker = ticker.strip().upper()
+
     try:
-        data = requests.get(
+        resp = requests.get(
             f"https://www.alphavantage.co/query?function=OVERVIEW"
             f"&symbol={ticker}&apikey={ALPHAVANTAGE_API_KEY}",
             timeout=10
-        ).json()
+        )
+        data = resp.json()
+
+        # Helpful for Streamlit Cloud logs / debugging
+        print(f"[get_company_overview] ticker={ticker} raw_response={data}")
+
+        # Handle common Alpha Vantage failure modes explicitly
+        if "Note" in data:
+            return {
+                "error": f"Alpha Vantage rate limit reached for {ticker}",
+                "raw": data
+            }
+
+        if "Information" in data:
+            return {
+                "error": f"Alpha Vantage returned information message for {ticker}",
+                "raw": data
+            }
+
+        if "Error Message" in data:
+            return {
+                "error": f"Alpha Vantage returned an error for {ticker}",
+                "raw": data
+            }
 
         if "Name" not in data or not data.get("Name"):
-            return {"error": f"No overview data for {ticker}"}
+            return {
+                "error": f"No overview data for {ticker}",
+                "raw": data
+            }
 
         return {
             "ticker": ticker,
@@ -190,8 +217,12 @@ def get_company_overview(ticker: str) -> dict:
             "52w_high": data.get("52WeekHigh", ""),
             "52w_low": data.get("52WeekLow", ""),
         }
-    except Exception:
-        return {"error": f"No overview data for {ticker}"}
+
+    except Exception as e:
+        return {
+            "error": f"No overview data for {ticker}",
+            "exception": str(e)
+        }
 
 
 # ── Tool 7 — YOUR IMPLEMENTATION ─────────────────────────────
