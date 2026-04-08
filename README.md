@@ -1,10 +1,7 @@
 # FinTech-Agent
 
-A FinTech agent with single-agent and multi-agent architectures for real-time stock analysis, company fundamentals, sector screening, and news sentiment.
+A FinTech agent with single-agent and multi-agent architectures for real-time stock analysis, company fundamentals, sector screening, and news sentiment. Deployed on Streamlit.
 
-## Live Demo
-
-[Streamlit App](https://fintech-agent-xnnthptj5appjqfsfw7pkhz.streamlit.app/)
 
 ## Overview
 
@@ -16,6 +13,17 @@ It supports two reasoning modes:
 - **Multi-Agent**: a specialist pipeline routes tasks across dedicated agents for market data, fundamentals, and sentiment
 
 The app is designed for finance questions that require **live API calls**, **local database lookup**, and **multi-step reasoning** rather than static background knowledge alone.
+
+## Screenshots
+
+### Model Selector
+![Model Selector](pic/model_select.png)
+
+### Agent Selector
+![Agent Selector](pic/agent_select.png)
+
+### Multi-turn Conversation Example
+![Conversation Example](pic/conversation.png)
 
 ## Features
 
@@ -73,16 +81,6 @@ The system integrates the following tools:
 - **Database**: SQLite
 - **Language**: Python
 
-## Screenshots
-
-### Model Selector
-![Model Selector](pic/model_select.png)
-
-### Agent Selector
-![Agent Selector](pic/agent_select.png)
-
-### Multi-turn Conversation Example
-![Conversation Example](pic/conversation.png)
 
 ## Project Structure
 
@@ -97,3 +95,8 @@ The system integrates the following tools:
 │   ├── agent_select.png
 │   └── conversation.png
 └── README.md
+```
+
+## Live Demo
+
+[Streamlit App](https://fintech-agent-xnnthptj5appjqfsfw7pkhz.streamlit.app/)
